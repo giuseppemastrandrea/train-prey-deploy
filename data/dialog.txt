@@ -1,0 +1,27 @@
+At the clothing store
+
+Salesperson - Good morning, can I help you?
+Customer - Yes, thank you. I saw a pair of black trousers in the window, can I try them on?
+Salesperson - Of course, what size?
+Customer - I wear a size 50.
+Salesperson - Here they are!
+Customer - Where are the fitting rooms?
+Salesperson - The fitting rooms are down there on the right, next to the stairs.
+Customer - Perfect, thank you.
+
+Salesperson - How are they?
+Customer - I like the style, but they're a bit tight. Can I try a larger size?
+Salesperson - Oh, I'm sorry, we're out of size 52 in this color, would you like to try the same model in brown?
+Customer - No, thank you, I really don't like brown. Don't you have other colors in this size?
+Salesperson - Well, in size 52 we have brown, red, and gray.
+Customer - Alright, I'll try them in gray, let's see how they fit.
+
+Customer - I tried on the trousers, they are really nice in gray and the size is perfect! How much are they?
+Salesperson - They cost €85.
+Customer - Aren't they on sale?
+Salesperson - Ah, no, I'm sorry, the sales are only on winter merchandise. These trousers are from the new summer collection.
+Customer - That's a shame, they seem a bit expensive.
+Salesperson - Look, it's 100% cotton, the quality of the material is excellent!
+Customer - Can I pay with a credit card?
+Salesperson - Of course, there are no problems, you can pay by card or cash.
+Customer - Okay, then I'll take them, thank you very much for your help.
