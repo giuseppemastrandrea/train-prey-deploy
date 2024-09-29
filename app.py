@@ -16,7 +16,10 @@ reale con il chatbot.
 from operator import itemgetter
 import os
 from langchain_openai import ChatOpenAI  # pip install langchain-openai
-from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder  # pip install langchain
+from langchain.prompts import (
+    ChatPromptTemplate,
+    MessagesPlaceholder,
+)  # pip install langchain
 from langchain.memory import ConversationBufferMemory
 from langchain.schema.runnable import RunnableLambda, RunnablePassthrough
 from langchain.schema import SystemMessage, HumanMessage
@@ -27,11 +30,13 @@ from langchain.agents import load_tools
 from langchain_openai import ChatOpenAI  # pip install langchain-openai
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.tools.render import render_text_description
-from langchain.agents.format_scratchpad.openai_tools import format_to_openai_tool_messages
+from langchain.agents.format_scratchpad.openai_tools import (
+    format_to_openai_tool_messages,
+)
 from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
 from langchain.agents import AgentExecutor
 import tensorflow as tf
-
+import gradio as gr
 
 
 def predict_wine_quality(query: str) -> int:
@@ -41,6 +46,7 @@ def predict_wine_quality(query: str) -> int:
     preds = model.predict([a])
     return preds[0][0]
 
+
 wine_tool = StructuredTool.from_function(
     func=predict_wine_quality,
     name="wine-tool",
@@ -48,13 +54,13 @@ wine_tool = StructuredTool.from_function(
 )
 
 model = ChatOpenAI(
-    openai_api_key="",
+    openai_api_key="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",
     temperature=0,
     max_tokens=1024,
     request_timeout=30,
-    model="gpt-4o"
+    model="gpt-4o",
 )
-tools = load_tools([], llm=model)  
+tools = load_tools([], llm=model)
 tools.append(wine_tool)
 
 prompt = ChatPromptTemplate.from_messages(
@@ -84,13 +90,12 @@ agent = (
 )
 
 agent_executor = AgentExecutor(
-    agent=agent, 
-    tools=tools, 
-    verbose=True, 
+    agent=agent,
+    tools=tools,
+    verbose=True,
     handle_parsing_errors=True,
-    return_intermediate_steps=True
+    return_intermediate_steps=True,
 )
-
 
 
 def stream_response(prompt):
@@ -103,22 +108,19 @@ def stream_response(prompt):
     """
     if prompt:
         resp = agent.invoke({"input": prompt})
-        return resp.to_json()['kwargs']['return_values']['output']
+        return resp.to_json()["kwargs"]["return_values"]["output"]
     return "Type a prompt!"
-
 
 
 # Creazione dell'interfaccia utente Gradio utilizzando "gr.ChatInterface",
 # che utilizza la funzione "stream_response" per gestire le interazioni
 # con il chatbot in modalità streaming in tempo reale
 iface = gr.Interface(
-    fn=stream_response, 
-    inputs=gr.Textbox(
-        lines=5, 
-        placeholder="Type your prompt here..."
-    ), 
-    outputs=gr.Textbox(), title="Wine Langchain agent 🦜",
-        description="Talk to me!"
+    fn=stream_response,
+    inputs=gr.Textbox(lines=5, placeholder="Type your prompt here..."),
+    outputs=gr.Textbox(),
+    title="Wine Langchain agent 🦜",
+    description="Talk to me!",
 )
 
 # Launch the interface
